@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lista de Usuários</title>
+</head>
+<body>
+  <h2>Usuários Cadastrados</h2>
+  <ul id="userList"></ul>
+
+  <script>
+    async function carregarUsuarios() {
+      const res = await fetch('/users');
+      const users = await res.json();
+
+      const lista = document.getElementById('userList');
+      lista.innerHTML = '';
+
+      users.forEach((user) => {
+        const li = document.createElement('li');
+        li.textContent = `Nome: ${user.name}, Email: ${user.email}`;
+        lista.appendChild(li);
+      });
+    }
+
+    carregarUsuarios();
+  </script>
+</body>
+</html>
